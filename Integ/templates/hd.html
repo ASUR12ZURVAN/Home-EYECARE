@@ -1,18 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <script src="index.js"></script>    
-    <h1>HD Page</h1>
-    <form action = "user">
-        Enter the line number clearly read <input type = "number" name = "line_num">
-        <input type = "Submit">
+    <title>Diopter Test</title>
+    <style>
+        .sentence {
+            margin: 10px 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Eye Test - Select the Line You Can Read</h1>
+
+    <div>
+        <p class="sentence" style="font-size: 322px;text-align: center;">E</p>
+        <p class="sentence" style="font-size: 299px;text-align: center;">F P</p>
+        <p class="sentence" style="font-size: 276px;text-align: center;">T O Z</p>
+        <p class="sentence" style="font-size: 252px;text-align: center;">E L D P</p>
+        <p class="sentence" style="font-size: 229px;text-align: center;">F D C Z E</p>
+        <p class="sentence" style="font-size: 184px;text-align: center;">F C Z D E P</p>
+        <p class="sentence" style="font-size: 161px;text-align: center;">O D P Z E F L</p>
+        <p class="sentence" style="font-size: 138px;text-align: center;">C P D T E F O F</p>
+        <p class="sentence" style="font-size: 116px;text-align: center;">Z F T L E D O P</p>
+        <p class="sentence" style="font-size: 92px;text-align: center;">F D P L T C D O</p>
+        <p class="sentence" style="font-size: 69px;text-align: center;">F P L D T C D O</p>
+        <p class="sentence" style="font-size: 46px;text-align: center;">F D C Z E</p>
+        <p class="sentence" style="font-size: 29px;text-align: center;">F D C Z E</p>
+
+
+
+
+
+
+
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="resolution" value="{% if 'hd' in request.path %}hd{% elif '2k' in request.path %}2k{% else %}4k{% endif %}">
+
+        <label for="line_number">Enter the line number you can read:</label>
+        <input type="number" name="line_number" required>
+
+        <label for="distance">Select the distance:</label>
+        <select name="distance" required>
+            <option value="25cm">25 cm (Hypermetropia)</option>
+            <option value="3m">3 meters (Myopia)</option>
+        </select>
+
+        <button type="submit">Get Diopter Value</button>
     </form>
-  </body>
+</body>
 </html>

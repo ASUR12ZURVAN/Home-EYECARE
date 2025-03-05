@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>Home - EyeCare</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <script src="index.js"></script>    
+</head>
+<body>
     <h1>Welcome to HOME-EYECARE</h1>
-    <form action = "user">
-      Enter your Name <input type = "text" name = "username"><br>
-      <input type = "submit">
-  </form>
-  </body>
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="resolution">Select Your Screen Resolution:</label>
+        <select name="resolution" required>
+            <option value="hd">1920x1080 (FHD, 24")</option>
+            <option value="2k">2560x1440 (2K, 27")</option>
+            <option value="4k">3840x2160 (4K, 32")</option>
+        </select>
+        <button type="submit">Next</button>
+    </form>
+
+    <script src="index.js"></script>  
+</body>
 </html>

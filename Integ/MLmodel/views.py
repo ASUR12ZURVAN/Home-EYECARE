@@ -2,16 +2,17 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("Hello World")
+    return render(request, 'index.html')  
 
-def first(request):
-    return render(request,'index.html')
+def User(request):  
+    if request.method == "POST":  
+        resolution = request.POST.get("resolution")
 
-def User(request):
-    username = request.GET.get('username')
-    print(username)
-    return render(request,'user.html',{'name':username})
+        if resolution == "hd":
+            return render(request, "hd.html")
+        elif resolution == "2k":
+            return render(request, "2k.html")
+        elif resolution == "4k":
+            return render(request, "4k.html")  
 
-
-
-# Create your views here.
+    return render(request, "index.html") 

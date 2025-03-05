@@ -1,5 +1,5 @@
 """
-WSGI config for Integration project.
+WSGI config for Integrate project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Integration.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Integrate.settings')
 
 application = get_wsgi_application()

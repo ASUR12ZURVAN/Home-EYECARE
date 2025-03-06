@@ -33,7 +33,7 @@
 
     </div>
 
-    <form method="post">
+    <form method="post" action = "{% url 'result' %}">
         {% csrf_token %}
         <input type="hidden" name="resolution" value="{% if 'hd' in request.path %}hd{% elif '2k' in request.path %}2k{% else %}4k{% endif %}">
 

@@ -1,18 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>4K Eye Test</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+</head>
+<body>
     <script src="index.js"></script>    
+
     <h1>4K PAGE</h1>
-    <form action = "user">
-        Enter the line number clearly read <input type = "number" name = "line_num">
-        <input type = "Submit">
+
+    <form action="user">
+        Enter the line number clearly read <input type="number" name="line_num">
+        <input type="Submit">
     </form>
-  </body>
+    <h1 style="margin-bottom: 20px;">Eye Test - Select the Line Upto You Can Read</h1>
+    <h1 style="margin-bottom: 20px;">Scroll down</h1>
+
+    <div>
+        <p class="sentence" style="font-size: 642px; text-align: center; margin: 25px 0; line-height: 1.2;">E</p>
+        <p class="sentence" style="font-size: 598px; text-align: center; margin: 25px 0; line-height: 1.2;">F P</p>
+        <p class="sentence" style="font-size: 553px; text-align: center; margin: 25px 0; line-height: 1.2;">T O Z</p>
+        <p class="sentence" style="font-size: 509px; text-align: center; margin: 25px 0; line-height: 1.2;">E L P</p>
+        <p class="sentence" style="font-size: 464px; text-align: center; margin: 25px 0; line-height: 1.2;">F D E</p>
+        <p class="sentence" style="font-size: 420px; text-align: center; margin: 25px 0; line-height: 1.2;">F P G E</p>
+        <p class="sentence" style="font-size: 375px; text-align: center; margin: 25px 0; line-height: 1.2;">F Z D E</p>
+        <p class="sentence" style="font-size: 331px; text-align: center; margin: 25px 0; line-height: 1.2;">Z D O E F</p>
+        <p class="sentence" style="font-size: 286px; text-align: center; margin: 25px 0; line-height: 1.2;">C P D T E F</p>
+        <p class="sentence" style="font-size: 242px; text-align: center; margin: 25px 0; line-height: 1.2;">Z F T L D O E</p>
+        <p class="sentence" style="font-size: 197px; text-align: center; margin: 25px 0; line-height: 1.2;">F D P L T C D E</p>
+        <p class="sentence" style="font-size: 148px; text-align: center; margin: 25px 0; line-height: 1.2;">F P L D T C D G</p>
+        <p class="sentence" style="font-size: 98px; text-align: center; margin: 25px 0; line-height: 1.2;">F Q C Z E</p>
+        <p class="sentence" style="font-size: 62px; text-align: center; margin: 25px 0; line-height: 1.2;">E D O W F</p>
+    </div>
+
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="resolution" value="{% if 'hd' in request.path %}hd{% elif '2k' in request.path %}2k{% else %}4k{% endif %}">
+
+      <label for="line_number">Enter the line number you can read:</label>
+      <input type="number" name="line_number" required>
+
+      <label for="distance">Select the distance:</label>
+      <select name="distance" required>
+          <option value="25cm">25 cm (Hypermetropia)</option>
+          <option value="3m">3 meters (Myopia)</option>
+      </select>
+
+      <button type="submit">Get Diopter Value</button>
+  </form>
+</body>
 </html>

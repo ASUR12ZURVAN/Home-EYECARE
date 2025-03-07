@@ -8,7 +8,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to HOME-EYECARE</h1>
+
+    <div class="navbar">
+        <h1>HOME-EYECARE</h1>
+        <div class="menu">
+            <a href="#">About Home-EyeCare</a>
+            <a href="#">Support</a>
+            <a href="#">My Account</a>
+        </div>
+    </div>
+
+    <h1 class="welcome">Welcome to HOME-EYECARE</h1>
     
     <form method="post">
         {% csrf_token %}
@@ -23,3 +33,8 @@
 
     <script src="index.js"></script>  
 </body>
+
+
+
+
+

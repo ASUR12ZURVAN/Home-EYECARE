@@ -35,7 +35,7 @@
 
     <form method="post" action = "{% url 'result' %}">
         {% csrf_token %}
-        <input type="hidden" name="resolution" value="{% if 'hd' in request.path %}hd{% elif '2k' in request.path %}2k{% else %}4k{% endif %}">
+        <input type="hidden" name="resolution" value="{{ resolution }}">
 
         <label for="line_number">Enter the line number you can read:</label>
         <input type="number" name="line_number" required>

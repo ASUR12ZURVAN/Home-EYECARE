@@ -4,10 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>Diopter Test Result</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <h1>Diopter Test Result</h1>
+
+    <div id="result-container">
+      {% if diopter is not None %}
+        <p><strong>Diopter Value:</strong> {{ diopter }}</p>
+        <p><strong>Selected Resolution:</strong> {{ resolution }}</p>
+        <p><strong>Viewing Distance:</strong> {{ distance }} meters</p>
+      {% else %}
+        <p>No result available.</p>
+      {% endif %}
+    </div>
+
+    <button onclick="goBack()">Go Back</button>
+
+    <script>
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+
     <script src="index.js"></script>   
   </body>
 </html>

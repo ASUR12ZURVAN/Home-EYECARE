@@ -12,13 +12,6 @@
 
     <h1>4K PAGE</h1>
 
-    <form action="user">
-        Enter the line number clearly read <input type="number" name="line_num">
-        <input type="Submit">
-    </form>
-    <h1 style="margin-bottom: 20px;">Eye Test - Select the Line Upto You Can Read</h1>
-    <h1 style="margin-bottom: 20px;">Scroll down</h1>
-
     <div>
         <p class="sentence" style="font-size: 642px; text-align: center; margin: 25px 0; line-height: 1.2;">E</p>
         <p class="sentence" style="font-size: 598px; text-align: center; margin: 25px 0; line-height: 1.2;">F P</p>
@@ -36,10 +29,9 @@
         <p class="sentence" style="font-size: 62px; text-align: center; margin: 25px 0; line-height: 1.2;">E D O W F</p>
     </div>
 
-    <form method="post">
+    <form method="post"action = "{% url 'result' %}">
       {% csrf_token %}
-      <input type="hidden" name="resolution" value="{% if 'hd' in request.path %}hd{% elif '2k' in request.path %}2k{% else %}4k{% endif %}">
-
+      <input type="hidden" name="resolution" value="{{ resolution }}">
       <label for="line_number">Enter the line number you can read:</label>
       <input type="number" name="line_number" required>
 

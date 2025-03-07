@@ -21,11 +21,11 @@ def User(request):
         resolution = request.POST.get("resolution")
 
         if resolution == "hd":
-            return render(request, "hd.html")
+            return render(request, "hd.html",{"resolution":"hd"})
         elif resolution == "2k":
-            return render(request, "2k.html")
+            return render(request, "2k.html",{"resolution":"2k"})
         elif resolution == "4k":
-            return render(request, "4k.html")  
+            return render(request, "4k.html",{"resolution":"4k"})  
 
     return render(request, "index.html")
 
@@ -36,32 +36,31 @@ def get_diopter_result(request):
         line_number = request.POST.get("line_number")
         distance_str = request.POST.get("distance")
 
-        if not resolution or not line_number or not distance:
+        if not resolution or not line_number or not distance_str:
             return render(request, "error.html", {"message": "Missing input values."})
 
         try:
-            line_number = int(line_number)
+            line_number = int(line_number)  # Convert to integer
         except ValueError:
             return render(request, "error.html", {"message": "Invalid line number."})
 
         if resolution not in PIXEL_SIZES or not (1 <= line_number <= len(PIXEL_SIZES[resolution])):
             return render(request, "error.html", {"message": "Invalid line number or resolution."})
 
-        pixel_size = PIXEL_SIZES[resolution][line_number - 1]
+        # Ensure pixel_size is a float
+        pixel_size = float(PIXEL_SIZES[resolution][line_number - 1])  
 
-        #this is needed because the numpy needs float or int to work on
-        #and currently distance was in string so it was giving error
-        #we use a map to solve this
-
-        distance_map = {"25cm":0.25,"3m":3.0}
-        distance = distance_map.get(distance_str,None)
+        # Convert distance string to numeric value
+        distance_map = {"25cm": 0.25, "3m": 3.0}
+        distance = distance_map.get(distance_str, None)
 
         if distance is None:
-            return render(request, "error.html",{"message":"Invalid distance value."})
+            return render(request, "error.html", {"message": "Invalid distance value."})
 
-
-        diopter = model.get_diopter(pixel_size, resolution)
-
+        try:
+            diopter = model.get_diopter(pixel_size)  # Ensure inputs are numbers
+        except Exception as e:
+            return render(request, "error.html", {"message": f"Model Error: {str(e)}"})
 
         return render(request, "diopter_result.html", {
             "diopter": diopter,

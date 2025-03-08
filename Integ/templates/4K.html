@@ -9,10 +9,18 @@
 </head>
 <body>
     <script src="index.js"></script>    
-
-    <h1>4K PAGE</h1>
-    <h1>SCROLL DOWN</h1>
-
+    
+    <div class="navbar">
+        <h1>4K PAGE</h1>
+    </div>
+    
+  
+    <div class="scroll-animation">
+        <img src="Page 42.gif" alt="Scroll Down Animation">
+    </div>
+    
+    
+    
     <div style="display: flex; flex-direction: column; align-items: center;">
         <div style="display: flex; align-items: center; width: 100%;">
             <p style="font-size: 30px; text-align: left; width: 100px;">1st</p>
@@ -63,7 +71,7 @@
             <p style="font-size: 30px; text-align: left; width: 100px;">10th</p>
             <p class="sentence" style="font-size: 242px; text-align: center; flex-grow: 1;">Z F L D O E</p>
         </div>
-    
+      
         <div style="display: flex; align-items: center; width: 100%;">
             <p style="font-size: 30px; text-align: left; width: 100px;">11th</p>
             <p class="sentence" style="font-size: 197px; text-align: center; flex-grow: 1;">F D P L T C D E</p>
@@ -73,7 +81,7 @@
             <p style="font-size: 30px; text-align: left; width: 100px;">12th</p>
             <p class="sentence" style="font-size: 148px; text-align: center; flex-grow: 1;">F P L D T C D G</p>
         </div>
-    
+     
         <div style="display: flex; align-items: center; width: 100%;">
             <p style="font-size: 30px; text-align: left; width: 100px;">13th</p>
             <p class="sentence" style="font-size: 98px; text-align: center; flex-grow: 1;">F Q C Z E R Y P O</p>
@@ -84,19 +92,19 @@
             <p class="sentence" style="font-size: 62px; text-align: center; flex-grow: 1;">E D O W F E Q I O P</p>
         </div>
     </div>
-
+    
     <form method="post"action = "{% url 'result' %}">
       {% csrf_token %}
       <input type="hidden" name="resolution" value="{{ resolution }}">
       <label for="line_number">Enter the line number you can read:</label>
       <input type="number" name="line_number" required>
-
+    
       <label for="distance">Select the distance:</label>
       <select name="distance" required>
           <option value="25cm">25 cm (Hypermetropia)</option>
           <option value="3m">3 meters (Myopia)</option>
       </select>
-
+    
       <button type="submit">Get Diopter Value</button>
   </form>
 </body>

@@ -1,33 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Diopter Test Result</title>
     <link rel="stylesheet" href="sty.css">
-  </head>
-  <body>
-    <h1>Diopter Test Result</h1>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('selective-myopia-2084175_1920.jpg') no-repeat center center/cover;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0.5;
+        }
 
-    <div id="result-container">
-      {% if diopter is not None %}
-        <p><strong>Diopter Value:</strong> {{ diopter }}</p>
-        <p><strong>Selected Resolution:</strong> {{ resolution }}</p>
-        <p><strong>Viewing Distance:</strong> {{ distance }} meters</p>
-      {% else %}
-        <p>No result available.</p>
-      {% endif %}
+        body:hover {
+            opacity: 1;
+        }
+        
+        #certificate {
+            background: rgba(255, 255, 255, 0.9); /* Slight transparency for readability */
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: rgb(50, 50, 51);
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="certificate">
+        <h1>Diopter Test Result</h1>
+
+        <div id="result-container">
+            {% if diopter is not None %}
+                <p><strong>Diopter Value:</strong> {{ diopter }}</p>
+                <p><strong>Selected Resolution:</strong> {{ resolution }}</p>
+                <p><strong>Viewing Distance:</strong> {{ distance }} meters</p>
+            {% else %}
+                <p>No result available.</p>
+            {% endif %}
+        </div>
+
+        <button onclick="goBack()">Go Back</button>
     </div>
 
-    <button onclick="goBack()">Go Back</button>
-
     <script>
-      function goBack() {
-        window.history.back();
-      }
+        function goBack() {
+            window.history.back();
+        }
     </script>
 
-    <script src="index.js"></script>   
-  </body>
+    <script src="index.js"></script>
+    
+</body>
 </html>

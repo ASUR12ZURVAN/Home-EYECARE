@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Diopter Test Result</title>
     <link rel="stylesheet" href="sty.css">
-    <
+    
     <style>
         body {
             display: flex;
@@ -33,7 +33,12 @@
             border: 2px solid #ccc;
             max-width: 600px;
             width: 90%;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
+        #certificate:hover {
+          transform: scale(1.05);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
 
         h1 {
             margin-bottom: 20px;
@@ -53,10 +58,12 @@
             color: white;
             cursor: pointer;
             border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color:rgb(51, 53, 55);
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -88,3 +95,5 @@
     
 </body>
 </html>
+
+

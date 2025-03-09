@@ -6,34 +6,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>About - Home EyeCare</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'sty.css' %}">
+
+    <style>
+        body {
+            margin: 0;
+            background: url("{% static 'selective-myopia-2084175_1920.jpg'%}") no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Main wrapper to apply opacity hover effect (excluding navbar) */
+        .content-wrapper {
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0.5;
+        }
+
+        /* Hover Effect (Excluding Navbar) */
+        .content-wrapper:hover {
+            opacity: 1;
+        }
+
+        /* Navbar Styling - No Hover Effect */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color:rgb(80, 85, 90); /* Dark Gray */
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+            color: #ddd;
+        }
+
+        /* About Section */
+        .about-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            text-align: center;
+        }
+
+        .about-box {
+            background: white;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            max-width: 600px;
+            width: 90%;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        /* Hover Effect on About Box */
+        .about-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        /* Hover Effect on Button */
+        .back-home:hover {
+            background-color: rgb(75, 77, 78);
+            transform: scale(1.1);
+        }
+
+    </style>
 </head>
 <body>
 
     <div class="navbar">
         <h1>HOME-EYECARE</h1>
         <div class="menu">
-            <a href="{% url 'index' %}">Home</a>
-            <a href="{% url 'about' %}">About Home-EyeCare</a>
             <a href="#">Support</a>
         </div>
     </div>
 
-    <h1>About Home-EyeCare</h1>
-    <p>
-        Welcome to **Home-EyeCare**, an initiative designed to provide an affordable and accessible eye-testing solution.
-        Our goal is to help individuals test their eyesight at home using simple online tools and scientifically backed measurements.
-        By selecting your screen resolution and viewing distance, we calculate an approximate diopter value to assess visual acuity.
-    </p>
+    <div class="content-wrapper">
+        <div class="about-container">
+            <div class="about-box">
+                <h1>About Home-EyeCare</h1>
+                <p>
+                    Welcome to <strong>Home-EyeCare</strong>, an initiative designed to provide an affordable and accessible eye-testing solution.
+                    Our goal is to help individuals test their eyesight at home using simple online tools and scientifically backed measurements.
+                    By selecting your screen resolution and viewing distance, we calculate an approximate diopter value to assess visual acuity.
+                </p>
 
-    <p>
-        This project was created to help people detect early signs of vision impairment without expensive equipment.
-        Our system follows a standard Snellen chart principle, ensuring accuracy within practical limits.
-    </p>
+                <p>
+                    This project was created to help people detect early signs of vision impairment without expensive equipment.
+                    Our system follows a standard Snellen chart principle, ensuring accuracy within practical limits.
+                </p>
 
-    <p>Thank you for trusting Home-EyeCare!</p>
+                <p>Thank you for trusting Home-EyeCare!</p>
 
-    <a href="{% url 'index' %}">Back to Home</a>
+                <a href="{% url 'index' %}" class="back-home">Back to Home</a>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

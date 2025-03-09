@@ -15,6 +15,8 @@ PIXEL_SIZES = {
 def index(request):
     return render(request, 'index.html')  
 
+def about(request):
+    return render(request, 'about.html')
 
 def User(request):  
     if request.method == "POST":  

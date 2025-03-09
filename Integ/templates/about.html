@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About - Home EyeCare</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>HOME-EYECARE</h1>
+        <div class="menu">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'about' %}">About Home-EyeCare</a>
+            <a href="#">Support</a>
+        </div>
+    </div>
+
+    <h1>About Home-EyeCare</h1>
+    <p>
+        Welcome to **Home-EyeCare**, an initiative designed to provide an affordable and accessible eye-testing solution.
+        Our goal is to help individuals test their eyesight at home using simple online tools and scientifically backed measurements.
+        By selecting your screen resolution and viewing distance, we calculate an approximate diopter value to assess visual acuity.
+    </p>
+
+    <p>
+        This project was created to help people detect early signs of vision impairment without expensive equipment.
+        Our system follows a standard Snellen chart principle, ensuring accuracy within practical limits.
+    </p>
+
+    <p>Thank you for trusting Home-EyeCare!</p>
+
+    <a href="{% url 'index' %}">Back to Home</a>
+
+</body>
+</html>

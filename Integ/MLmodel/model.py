@@ -34,4 +34,3 @@ class DiopterDataModel:
         """
         return self.data
 
-

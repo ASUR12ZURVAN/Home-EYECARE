@@ -46,11 +46,17 @@ def get_diopter_result(request):
         except ValueError:
             return render(request, "error.html", {"message": "Invalid line number."})
 
-        if resolution not in PIXEL_SIZES or not (1 <= line_number <= len(PIXEL_SIZES[resolution])):
-            return render(request, "error.html", {"message": "Invalid line number or resolution."})
+        if resolution not in PIXEL_SIZES:
+            return render(request, "error.html", {"message": "Invalid resolution."})
 
-        # Ensure pixel_size is a float
-        pixel_size = float(PIXEL_SIZES[resolution][line_number - 1])  
+        # Trigger an IndexError when line_number is 15
+        if line_number > 14 or line_number < 0:  
+            return render(request, "error.html", {"message": "Invalid Line Number."})
+
+        try:
+            pixel_size = float(PIXEL_SIZES[resolution][line_number])
+        except IndexError:
+            return render(request, "error.html", {"message": "Line number exceeded the possible value (1-14)."})
 
         # Convert distance string to numeric value
         distance_map = {"25cm": 0.25, "3m": 3.0}

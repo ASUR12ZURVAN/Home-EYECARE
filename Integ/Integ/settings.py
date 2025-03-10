@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-^a9ptgv7-wg*^-ysi%s%5=x@=m90#ts-xd^=&y#k00px2a9fjn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["Home-EYECARE-1.onrender.com",'127.0.0.1', 'localhost'] 
+
+ALLOWED_HOSTS = ["*"]
+
+ 
 #this allows the hosts to run this website on their server
 
 

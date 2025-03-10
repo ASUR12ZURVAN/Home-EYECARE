@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://home-eyecare-1.onrender.com"
+]
+
+
  
 #this allows the hosts to run this website on their server
 

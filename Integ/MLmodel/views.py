@@ -1,10 +1,12 @@
+import os
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse
 from MLmodel.model import DiopterDataModel
 
-
-model = DiopterDataModel(r"D:\MY REPO\Home-EYECARE\Integ\MLmodel\diopter_data_combined2.csv")
-
+# Load the model dynamically using BASE_DIR
+csv_path = os.path.join(settings.BASE_DIR, "MLmodel", "diopter_data_combined2.csv")
+model = DiopterDataModel(csv_path)
 
 PIXEL_SIZES = {
     "hd": [322, 299, 276, 252, 229, 207, 184, 161, 138, 116, 92, 69, 46, 29, 1],
@@ -22,12 +24,8 @@ def User(request):
     if request.method == "POST":  
         resolution = request.POST.get("resolution")
 
-        if resolution == "hd":
-            return render(request, "hd.html",{"resolution":"hd"})
-        elif resolution == "2k":
-            return render(request, "2k.html",{"resolution":"2k"})
-        elif resolution == "4k":
-            return render(request, "4k.html",{"resolution":"4k"})  
+        if resolution in ["hd", "2k", "4k"]:
+            return render(request, f"{resolution}.html", {"resolution": resolution})  
 
     return render(request, "index.html")
 
@@ -49,18 +47,17 @@ def get_diopter_result(request):
         if resolution not in PIXEL_SIZES:
             return render(request, "error.html", {"message": "Invalid resolution."})
 
-        # Trigger an IndexError when line_number is 15
-        if line_number > 14 or line_number < 0:  
+        if not (0 <= line_number < len(PIXEL_SIZES[resolution])):  
             return render(request, "error.html", {"message": "Invalid Line Number."})
 
         try:
             pixel_size = float(PIXEL_SIZES[resolution][line_number])
         except IndexError:
-            return render(request, "error.html", {"message": "Line number exceeded the possible value (1-14)."})
+            return render(request, "error.html", {"message": "Line number exceeded the possible value."})
 
         # Convert distance string to numeric value
         distance_map = {"25cm": 0.25, "3m": 3.0}
-        distance = distance_map.get(distance_str, None)
+        distance = distance_map.get(distance_str)
 
         if distance is None:
             return render(request, "error.html", {"message": "Invalid distance value."})

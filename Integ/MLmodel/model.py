@@ -11,7 +11,7 @@ class DiopterDataModel:
         """
         # Default to the CSV file in the Django project
         if csv_file is None:
-            csv_file = os.path.join(settings.BASE_DIR, "Integ", "MLmodel", "diopter_data_combined2.csv")
+            csv_file = os.path.join(settings.BASE_DIR,"MLmodel", "diopter_data_combined2.csv")
 
         # Check if the file exists before loading
         if not os.path.exists(csv_file):

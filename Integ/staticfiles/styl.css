@@ -1,0 +1,47 @@
+.navbar {
+    width: 100vw; /* Full viewport width */
+    background-color: #444; /* Adjust color as needed */
+    color: white;
+    padding: 15px 20px;
+    box-sizing: border-box; /* Ensures padding doesn't add extra width */
+}
+
+
+.navbar h1 {
+    color: white;
+    margin: 0;
+    font-size: 20px;
+}
+
+.navbar .menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+.navbar .menu a:hover {
+    text-decoration: underline;
+}
+.scroll-animation img {
+    width: 100vw; /* Full width of the screen */
+    height: 100vh; /* Full height of the screen */
+    object-fit: cover; /* Ensures the image covers the entire area */
+    display: block; /* Remove extra inline spacing */
+    margin-bottom: -20px; /* Adjust to reduce space */
+}
+.scroll-animation {
+    margin-bottom: 0; /* Remove bottom margin */
+    padding-bottom: 0; /* Remove any extra padding */
+}
+
+
+div[style*="display: flex; flex-direction: column;"] {
+    margin-top: -50px; /* Bring text closer */
+}
+
+
+
+
+
+

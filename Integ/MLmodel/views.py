@@ -29,7 +29,7 @@ def User(request):
 
     return render(request, "index.html")
 
-
+#important to have linux path system
 def get_diopter_result(request):
     if request.method == "POST":
         resolution = request.POST.get("resolution")

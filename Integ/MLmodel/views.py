@@ -55,7 +55,6 @@ def get_diopter_result(request):
         except IndexError:
             return render(request, "error.html", {"message": "Line number exceeded the possible value."})
 
-        # Convert distance string to numeric value
         distance_map = {"25cm": 0.25, "3m": 3.0}
         distance = distance_map.get(distance_str)
 
@@ -63,7 +62,7 @@ def get_diopter_result(request):
             return render(request, "error.html", {"message": "Invalid distance value."})
 
         try:
-            diopter = model.get_diopter(pixel_size)  # Ensure inputs are numbers
+            diopter = model.get_diopter(pixel_size)  
         except Exception as e:
             return render(request, "error.html", {"message": f"Model Error: {str(e)}"})
 

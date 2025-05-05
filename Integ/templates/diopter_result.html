@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Diopter Test Result</title>
-    <link rel="stylesheet" href="sty.css">
-    
+
     <style>
         body {
             display: flex;
@@ -15,17 +13,18 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background: url("{% static 'selective-myopia-2084175_1920.jpg'%}") no-repeat center center/cover;
+            background: url({% static 'selective-myopia-2084175_1920.jpg' %}) no-repeat center center/cover;
             transition: opacity 0.5s ease-in-out;
             opacity: 0.5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body:hover {
             opacity: 1;
         }
-        
+
         #certificate {
-            background: rgba(255, 255, 255, 0.9); /* Slight transparency for readability */
+            background: rgba(255, 255, 255, 0.95);
             padding: 40px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -35,18 +34,21 @@
             width: 90%;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
+
         #certificate:hover {
-          transform: scale(1.05);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      }
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
 
         h1 {
             margin-bottom: 20px;
+            color: #333;
         }
 
         p {
             font-size: 18px;
-            margin: 10px 0;
+            margin: 12px 0;
+            color: #444;
         }
 
         button {
@@ -62,7 +64,7 @@
         }
 
         button:hover {
-            background-color:rgb(51, 53, 55);
+            background-color: rgb(51, 53, 55);
             transform: scale(1.1);
         }
     </style>
@@ -74,9 +76,35 @@
 
         <div id="result-container">
             {% if diopter is not None %}
-                <p><strong>Diopter Value:</strong> {{ diopter }}</p>
-                <p><strong>Selected Resolution:</strong> {{ resolution }}</p>
-                <p><strong>Viewing Distance:</strong> {{ distance }} meters</p>
+                <p><strong>Diopter Value:</strong>
+                    {% if diopter > 0 %}
+                        +{{ diopter }} (Hypermetropia)
+                    {% elif diopter < 0 %}
+                        {{ diopter }} (Myopia)
+                    {% else %}
+                        0 (Normal Vision)
+                    {% endif %}
+                </p>
+                <p><strong>Selected Resolution:</strong>
+                    {% if resolution == "hd" %}
+                        1920x1080 (FHD, 24")
+                    {% elif resolution == "2k" %}
+                        2560x1440 (2K, 27")
+                    {% elif resolution == "4k" %}
+                        3840x2160 (4K, 32")
+                    {% else %}
+                        Unknown Resolution
+                    {% endif %}
+                </p>
+                <p><strong>Viewing Distance:</strong>
+                    {% if distance == "25cm" %}
+                        25 cm
+                    {% elif distance == "3m" %}
+                        3 meters
+                    {% else %}
+                        {{ distance }}
+                    {% endif %}
+                </p>
             {% else %}
                 <p>No result available.</p>
             {% endif %}
@@ -91,9 +119,5 @@
         }
     </script>
 
-    <script src="index.js"></script>
-    
 </body>
 </html>
-
-

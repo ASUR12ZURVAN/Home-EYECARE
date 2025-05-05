@@ -19,7 +19,7 @@
    
     <h1 class="welcome">Welcome to HOME-EYECARE</h1>
     
-    <form method="post">
+    <form method="post" action="{% url 'base' %}">  <!-- FIXED FORM ACTION -->
         {% csrf_token %}
         <label for="resolution">Select Your Screen Resolution:</label>
         <select name="resolution" required>
@@ -30,10 +30,6 @@
         <button type="submit">Next</button>
     </form>
 
-    <script src="index.js"></script>  
+    <script src="{% static 'index.js' %}"></script>  
 </body>
-
-
-
-
-
+</html>

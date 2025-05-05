@@ -1,7 +1,6 @@
 import os
 from django.conf import settings
 from django.shortcuts import render
-from django.http import HttpResponse
 from MLmodel.model import DiopterDataModel
 
 # Load the model dynamically using BASE_DIR
@@ -15,21 +14,18 @@ PIXEL_SIZES = {
 }
 
 def index(request):
-    return render(request, 'index.html')  
+    return render(request, 'index.html')
 
 def about(request):
     return render(request, 'about.html')
 
-def User(request):  
-    if request.method == "POST":  
+def User(request):
+    if request.method == "POST":
         resolution = request.POST.get("resolution")
-
         if resolution in ["hd", "2k", "4k"]:
-            return render(request, f"{resolution}.html", {"resolution": resolution})  
-
+            return render(request, f"{resolution}.html", {"resolution": resolution})
     return render(request, "index.html")
 
-#important to have linux path system
 def get_diopter_result(request):
     if request.method == "POST":
         resolution = request.POST.get("resolution")
@@ -40,20 +36,20 @@ def get_diopter_result(request):
             return render(request, "error.html", {"message": "Missing input values."})
 
         try:
-            line_number = int(line_number)  # Convert to integer
+            line_number = int(line_number)
         except ValueError:
-            return render(request, "error.html", {"message": "Invalid line number."})
+            return render(request, "error.html", {"message": "Line number must be an integer."})
 
         if resolution not in PIXEL_SIZES:
-            return render(request, "error.html", {"message": "Invalid resolution."})
+            return render(request, "error.html", {"message": "Invalid resolution selected."})
 
-        if not (0 <= line_number < len(PIXEL_SIZES[resolution])):  
-            return render(request, "error.html", {"message": "Invalid Line Number."})
+        if not (0 <= line_number < len(PIXEL_SIZES[resolution])):
+            return render(request, "error.html", {"message": "Line number out of range."})
 
         try:
             pixel_size = float(PIXEL_SIZES[resolution][line_number])
-        except IndexError:
-            return render(request, "error.html", {"message": "Line number exceeded the possible value."})
+        except (IndexError, ValueError):
+            return render(request, "error.html", {"message": "Unable to fetch pixel size."})
 
         distance_map = {"25cm": 0.25, "3m": 3.0}
         distance = distance_map.get(distance_str)
@@ -62,12 +58,28 @@ def get_diopter_result(request):
             return render(request, "error.html", {"message": "Invalid distance value."})
 
         try:
-            diopter = model.get_diopter(pixel_size)  
+            diopter = model.get_diopter(
+                pixel_size,
+                resolution=resolution_map(resolution),
+                distance=distance
+            )
         except Exception as e:
-            return render(request, "error.html", {"message": f"Model Error: {str(e)}"})
+            return render(request, "error.html", {"message": f"Model error: {str(e)}"})
+
+        condition = model.get_condition_type(distance)
 
         return render(request, "diopter_result.html", {
             "diopter": diopter,
-            "distance": distance, 
+            "condition": condition,
+            "distance": distance_str,
             "resolution": resolution
         })
+
+    return render(request, "index.html")
+
+def resolution_map(res_key):
+    return {
+        "hd": "1920x1080 (FHD, 24\")",
+        "2k": "2560x1440 (2K, 27\")",
+        "4k": "3840x2160 (4K, 32\")"
+    }.get(res_key)

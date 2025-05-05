@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://home-eyecare-1.onrender.com",
-    "https://home-eyecare2.onrender.com/","*"
+    "https://home-eyecare2.onrender.com/",
 ]
 
 
